@@ -1,17 +1,42 @@
 <template>
-  <div class="home">
-    <ToDoList></ToDoList>
+  <div class="container">
+    <div class="h1">"Todo" ничего не забыто!!!</div>
+    <ul class="list-group">
+      <CategoryItem
+          v-for="cat in categories"
+          :categories="cat"
+          :key="cat.id"
+          @click="removeItemCategories(cat.id)"
+      />
+    </ul>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import ToDoList from '@/components/ToDoList';
+import CategoryItem from '@/components/category/CategoryItem';
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Home',
   components: {
-    ToDoList
+    CategoryItem,
+  },
+  data() {
+    return {
+      categories: [],
+    }
+  },
+  async created () {
+    this.categories = await this.getCategories()
+  },
+  methods: {
+    ...mapGetters([
+        'getCategories',
+    ]),
+    removeItemCategories (id) {
+      // const
+      console.log(id);
+    }
   }
 }
 </script>
