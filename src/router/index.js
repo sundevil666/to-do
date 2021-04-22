@@ -11,10 +11,19 @@ const routes = [
     component: Home
   },
   {
-    path: '/edit',
-    name: 'Edit',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Edit.vue')
-  }
+    path: '/edit/:id',
+    name: 'edit',
+    component: () => import('../views/Edit.vue')
+  },
+  {
+    path: '/404',
+    name: '404',
+    component: () => import('../views/PageNotFound.vue')
+  },
+  {
+    path: '*',
+    redirect: '404'
+  },
 ]
 
 const router = new VueRouter({
